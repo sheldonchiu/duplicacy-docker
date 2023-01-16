@@ -1,0 +1,25 @@
+#!/usr/bin/with-contenv bash
+
+
+if [ ! -d ~/.duplicacy-web ]; then
+    ln -s /config/  ~/.duplicacy-web
+fi
+
+touch /logs/duplicacy_web.log
+
+if [ ! -f /config/settings.json ]; then
+    echo '{
+        "listening_address"     : "0.0.0.0:3875",
+        "log_directory"         : "/logs",
+        "temporary_directory"   : "/cache"
+    }'          > /config/settings.json
+fi
+
+if [ ! -f /config/duplicacy.json ]; then
+    echo '{}'   > /config/duplicacy.json
+fi
+
+
+echo "Starting duplicacy_web"
+exec s6-setuidgid abc /config/bin/duplicacy
+

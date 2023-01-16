@@ -1,0 +1,5 @@
+{
+        "listening_address"     : "0.0.0.0:3875",
+        "log_directory"         : "/logs",
+        "temporary_directory"   : "/cache"
+    }
